@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel 
+apellido: Monzón
 ---
 TP: ES_Facturaciones
 ---
@@ -41,7 +41,7 @@ class App(customtkinter.CTk):
         
         self.txt_importe_3 = customtkinter.CTkEntry(master=self)
         self.txt_importe_3.grid(row=2, column=1)
-       
+        
         self.btn_total = customtkinter.CTkButton(master=self, text="TOTAL", command=self.btn_total_on_click)
         self.btn_total.grid(row=3, pady=10, columnspan=2, sticky="nsew")
         
@@ -52,13 +52,51 @@ class App(customtkinter.CTk):
         self.btn_total_iva.grid(row=5, pady=10, columnspan=2, sticky="nsew")
 
     def btn_total_on_click(self):
-        pass
+        variable_uno = self.txt_importe_1.get()
+        variable_dos = self.txt_importe_2.get()
+        variable_tres = self.txt_importe_3.get()
+
+        numero_uno = float(variable_uno)
+        numero_dos = float(variable_dos)
+        numero_tres = float(variable_tres)
+
+        total_suma = numero_uno+numero_dos+numero_tres
+
+        mensaje = "El total de la suma de {0}, {1} y {2} es de: {3}".format(numero_uno, numero_dos, numero_tres, total_suma)
+
+        alert("Respuesta", mensaje)
 
     def btn_promedio_on_click(self):
-        pass
+        variable_uno = self.txt_importe_1.get()
+        variable_dos = self.txt_importe_2.get()
+        variable_tres = self.txt_importe_3.get()
+
+        numero_uno = float(variable_uno)
+        numero_dos = float(variable_dos)
+        numero_tres = float(variable_tres)
+
+        total_suma = numero_uno+numero_dos+numero_tres
+        promedio = total_suma/3
+
+        mensaje = "El promedio de {0}, {1} y {2} es de: {3}".format(numero_uno, numero_dos, numero_tres, promedio)
+
+        alert("Respuesta", mensaje)
 
     def btn_total_iva_on_click(self):
-        pass      
+        variable_uno = self.txt_importe_1.get()
+        variable_dos = self.txt_importe_2.get()
+        variable_tres = self.txt_importe_3.get()
+
+        numero_uno = float(variable_uno)
+        numero_dos = float(variable_dos)
+        numero_tres = float(variable_tres)
+
+        total_suma = numero_uno+numero_dos+numero_tres
+        precio_final = total_suma + total_suma*21/100
+
+        mensaje = "El precio final de la suma de {0}, {1} y {2}, más IVA del 21%, es de: {3}".format(numero_uno, numero_dos, numero_tres, precio_final)
+
+        alert("Respuesta", mensaje)
     
 if __name__ == "__main__":
     app = App()

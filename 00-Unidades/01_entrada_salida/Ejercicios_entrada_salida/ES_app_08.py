@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 Ejercicio: entrada_salida_08
 ---
@@ -35,14 +35,24 @@ class App(customtkinter.CTk):
         self.txt_operador_b = customtkinter.CTkEntry(master=self)
         self.txt_operador_b.grid(row=1, column=1)
         
-        self.btn_mostrar = customtkinter.CTkButton(master=self, text="Mostrar", command=self.btn_mostrar_on_click)
+        self.btn_mostrar = customtkinter.CTkButton(master=self, text="Calcular", command=self.btn_mostrar_on_click)
         self.btn_mostrar.grid(row=2, pady=20, columnspan=2, sticky="nsew")
 
 
     def btn_mostrar_on_click(self):
-        pass
+        variable_uno = self.txt_operador_a.get()
+        variable_dos = self.txt_operador_b.get()
         
+        numero_uno = int(variable_uno)
+        numero_dos = int(variable_dos)
+
+        division_resto = numero_uno%numero_dos
         
+        mensaje = "El resultado de dividir {0} por {1} es: {2}".format(variable_uno, variable_dos, division_resto)
+
+        alert("Respuesta", mensaje)
+
+
     
 if __name__ == "__main__":
     app = App()
