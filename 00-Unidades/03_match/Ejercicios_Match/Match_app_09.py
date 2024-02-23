@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 Ejercicio: Match_09
 ---
@@ -47,7 +47,7 @@ class App(customtkinter.CTk):
         
         self.label_destinos = customtkinter.CTkLabel(master=self, text="Destinos")
         self.label_destinos.grid(row=2, column=0, padx=20, pady=10)
-        destinos = ['Bariloche', 'Mar del plata', 'Cataratas', 'Cordoba']
+        destinos = ['Bariloche', 'Mar del Plata', 'Cataratas', 'Cordoba']
         self.combobox_destino = customtkinter.CTkComboBox(master=self, values=destinos)
         self.combobox_destino.grid(row=3, column=0, padx=20, pady=(10, 10))
 
@@ -57,8 +57,45 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
-            
+        estacion = str(self.combobox_estaciones.get())
+        destino = str(self.combobox_destino.get())
+
+        estadia_base = int(15000)
+        aumento_descuento = int(0)
+
+        match estacion:
+            case "Invierno":
+                match destino:
+                    case "Bariloche":
+                        aumento_descuento = 20
+                    case "Cataratas"|"Cordoba":
+                        aumento_descuento = -10
+                    case "Mar del Plata":
+                        aumento_descuento = -20
+            case "Verano":
+                match destino:
+                    case "Bariloche":
+                        aumento_descuento = -20
+                    case "Cataratas"|"Cordoba":
+                        aumento_descuento = 10
+                    case "Mar del Plata":
+                        aumento_descuento = 20
+            case "Otoño":
+                match destino:
+                    case "Bariloche"|"Cataratas"|"Mar del Plata":
+                        aumento_descuento = 10
+                    case "Cordoba":
+                        aumento_descuento = 0
+            case _:
+                aumento_descuento = 0
+
+        tarifa_total = estadia_base + (estadia_base * aumento_descuento / 100)
+
+        mensaje = "La tarifa total para ir a {0} en la estación de {1} tiene un costo final de {2}".format(destino,estacion,tarifa_total)
+
+        alert("Costo de Viaje", mensaje)
+
+
     
 if __name__ == "__main__":
     app = App()

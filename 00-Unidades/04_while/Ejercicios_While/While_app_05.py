@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 Ejercicio: while_05
 ---
@@ -25,12 +25,15 @@ class App(customtkinter.CTk):
 
         self.title("UTN FRA")
         
-        self.btn_validar_letra = customtkinter.CTkButton(master=self, text="Ingresar", command=self.btn_validar_letra_on_click)
+        self.btn_validar_letra = customtkinter.CTkButton(master=self, text="Validar Letra", command=self.btn_validar_letra_on_click)
         self.btn_validar_letra.grid(row=2, pady=20, columnspan=2, sticky="nsew")
         
     
     def btn_validar_letra_on_click(self):
-        pass
+        letra = prompt("Letra", "Ingrese letra")
+
+        while letra != "U" and letra != "T" and letra != "N":
+            letra = prompt("Error", "Reingrese letra")
             
     
 if __name__ == "__main__":

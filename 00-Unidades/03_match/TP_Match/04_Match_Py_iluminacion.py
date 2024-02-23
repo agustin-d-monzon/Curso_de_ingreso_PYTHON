@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 TP: Iluminación
 ---
@@ -43,7 +43,59 @@ class App(customtkinter.CTk):
 
 
     def btn_calcular_on_click(self):
-        pass
+
+        marca = str(self.combobox_marca.get())
+        cantidad = int(self.combobox_cantidad.get())
+        descuento = int(0)
+
+        match cantidad:
+            case 5:
+                match marca:
+                    case "ArgentinaLuz":
+                        descuento == 40
+                    case _:
+                        descuento = 30
+            case 4:
+                match marca:
+                    case "ArgentinaLuz"|"FelipeLamparas":
+                        descuento = 25
+                    case _:
+                        descuento = 20
+            case 3:
+                match marca:
+                    case "ArgentinaLuz":
+                        descuento = 15
+                    case "FelipeLamparas":
+                        descuento = 10
+                    case _:
+                        descuento = 5
+            case 1 | 2:
+                descuento = 0
+            case _:
+                descuento = 50
+
+        descuento_uno = int(descuento)
+        
+        lamparas = 800
+        valor_lamparas = lamparas*cantidad
+
+        importe = valor_lamparas-(valor_lamparas*descuento/100)
+
+        if importe >= 4000:
+            descuento_adicional = 5
+        else:
+            descuento_adicional = 0
+
+        importe_final = importe-(importe*descuento_adicional/100)
+        
+        if descuento_uno == 0:
+            mensaje = "El importe final es: ${0}.".format(importe_final)
+        elif descuento_uno > 0 and descuento_adicional == 5:
+            mensaje = "El importe final es: ${0}. Se recibió -{1}% de descuento por la cantidad y marca elegida. Se recibió un descuento adicional del -5%".format(importe_final,descuento)
+        elif descuento_uno > 0 and descuento_adicional == 0:
+            mensaje = "El importe final es: ${0}. Se recibió -{1}% de descuento por la cantidad y marca elegida.".format(importe_final,descuento)
+
+        alert ("Importe final", mensaje)
         
     
 if __name__ == "__main__":

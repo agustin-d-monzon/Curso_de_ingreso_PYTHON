@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 Ejercicio: Match_10
 ---
@@ -37,7 +37,7 @@ class App(customtkinter.CTk):
         
         self.label_destinos = customtkinter.CTkLabel(master=self, text="Destinos")
         self.label_destinos.grid(row=2, column=0, padx=20, pady=10)
-        destinos = ['Bariloche', 'Mar del plata', 'Cataratas', 'Cordoba']
+        destinos = ['Bariloche', 'Mar del Plata', 'Cataratas', 'Cordoba']
         self.combobox_destino = customtkinter.CTkComboBox(master=self, values=destinos)
         self.combobox_destino.grid(row=3, column=0, padx=20, pady=(10, 10))
 
@@ -47,8 +47,32 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
-            
+        estacion = str(self.combobox_estaciones.get())
+        destino = str(self.combobox_destino.get())
+
+        match estacion:
+            case "Invierno":
+                match destino:
+                    case "Bariloche":
+                        mensaje = "Se viaja"
+                    case _:
+                        mensaje = "No se viaja"
+            case "Verano":
+                match destino:
+                    case "Mar del Plata"|"Cataratas":
+                        mensaje = "Se viaja"
+                    case "Bariloche"|"Cordoba":
+                        mensaje = "No se viaja"
+            case "Otoño":
+                mensaje = "Se viaja"
+            case "Primavera":
+                match destino:
+                    case "Bariloche":
+                        mensaje = "No se viaja"
+                    case _:
+                        mensaje = "Se viaja"
+
+        alert("", mensaje)
     
 if __name__ == "__main__":
     app = App()

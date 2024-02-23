@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 Ejercicio: Match_05
 ---
@@ -35,7 +35,11 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
+        hora = int(self.txt_hora.get())
+
+        match hora:
+            case 7 | 8 | 9 | 10 | 11:
+                alert("","Es de mañana")
     
     
 if __name__ == "__main__":

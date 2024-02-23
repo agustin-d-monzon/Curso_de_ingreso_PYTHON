@@ -5,13 +5,14 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre: Agustín Daniel
+apellido: Monzón
 ---
 TP: While_validaciones_rising_btl
 ---
 Enunciado:
-Rising BTL. Empresa dedicada a la toma de datos para realizar estadísticas y censos nos pide realizar una carga de datos validada e ingresada 
+Rising BTL. Empresa dedicada a la toma de datos para realizar estadísticas y 
+censos nos pide realizar una carga de datos validada e ingresada 
 por ventanas emergentes solamente (para evitar hacking y cargas maliciosas) y luego asignarla a cuadros de textos. 
 
 Los datos requeridos son los siguientes:
@@ -54,8 +55,39 @@ class App(customtkinter.CTk):
             master=self, text="Validar", command=self.btn_validar_on_click)
         self.btn_validar.grid(row=4, pady=20, columnspan=2, sticky="nsew")
 
-    def btn_validar_on_click(self):
-        pass
+    def btn_validar_on_click(self):    
+        
+        while True:
+            apellido = prompt("", "Ingrese Apellido")
+            
+            edad = prompt("", "Ingrese Edad")
+            edad = int(edad)
+            while edad < 18 or edad > 90:
+                edad = prompt("Error", "Ingrese Edad")
+                edad = int(edad)
+            
+            estado_civil = prompt("", "Ingrese Estado Civil")
+            while estado_civil != "Soltero/a" and estado_civil != "Casado/a" and estado_civil != "Divorciado/a" and estado_civil != "Viudo/a":
+                estado_civil = prompt("Error", "Ingrese Estado Civil")
+
+            numero_legajo = prompt("", "Ingrese Número de Legajo")
+            numero_legajo = int(numero_legajo)
+            while numero_legajo < 0 or numero_legajo > 9999:
+                numero_legajo = prompt("Error", "Ingrese Número de Legajo")
+                numero_legajo = int(numero_legajo)
+        
+            self.txt_apellido.delete(0, 'end')
+            self.txt_apellido.insert(0, apellido)
+
+            self.txt_edad.delete(0, 'end')
+            self.txt_edad.insert(0,str(edad))
+
+            self.txt_legajo.delete(0, 'end')
+            self.txt_legajo.insert(0,str(numero_legajo))
+
+            self.combobox_tipo(0, 'end')
+            self.combobox_tipo(0,estado_civil)
+
 
 
 if __name__ == "__main__":
